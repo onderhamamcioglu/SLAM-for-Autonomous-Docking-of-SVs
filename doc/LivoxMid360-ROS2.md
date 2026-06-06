@@ -59,7 +59,7 @@ cd ~/ws/src
 git clone [https://github.com/Livox-SDK/livox_ros_driver2.git](https://github.com/Livox-SDK/livox_ros_driver2.git)
 ```
 
-Before building, configure the driver to connect to your specific LiDAR IP. Open the configuration file `~/workspace/src/livox_ros_driver2/config/MID360_config.json`
+Before building, configure the driver to connect to your specific LiDAR IP. Open the configuration file `~/ws/src/livox_ros_driver2/config/MID360_config.json`
 
 Change ip adresses:
 - under `host_net_info` to `192.168.1.50`
