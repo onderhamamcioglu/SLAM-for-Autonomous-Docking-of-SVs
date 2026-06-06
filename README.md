@@ -1,4 +1,4 @@
-# SLAM-for-Autonomous-Docking-of-ASVs
+# SLAM-for-Autonomous-Docking-of-SVs
 Simultaneous Localization and Mapping for Autonomous Docking of Surface Vessels
 
 ## Introduction
