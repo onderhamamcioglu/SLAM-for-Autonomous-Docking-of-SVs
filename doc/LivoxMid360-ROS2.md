@@ -68,8 +68,8 @@ Change ip adresses:
 Now, build the package:
 
 ```bash
-source ~/ros2_ws/install/setup.bash
-cd ~/ros2_ws
+source ~/ws/install/setup.bash
+cd ~/ws
 colcon build --packages-select livox_ros_driver2
 ```
 
