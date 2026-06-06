@@ -11,11 +11,11 @@ This part covers setting up Fast-LIO2 with ROS 2 Humble on Ubuntu 22.04.
 ### 2.1 Dependencies
 ```bash
 sudo apt update
-sudo apt install python3-colcon-common-extensions ros-humble-pcl-ros -y
+sudo apt install python3-colcon-common-extensions ros-humble-pcl-ros cmake -y
 ```
 
 ### 2.2 Livox-SDK2
-Required for the Livox ROS 2 Driver.
+Required for the Livox ROS 2 Driver. (Skip if you did before)
 ```bash
 git clone https://github.com/Livox-SDK/Livox-SDK2.git ~/Livox-SDK2
 cd ~/Livox-SDK2 && mkdir build && cd build
@@ -23,7 +23,7 @@ cmake .. && make -j && sudo make install
 ```
 
 ### 2.3 Workspace Initialization
-Create a dedicated ROS 2 workspace directory.
+Create a dedicated ROS 2 workspace directory. (Skip if you did before)
 ```bash
 mkdir -p ~/ws/src
 sudo chown -R $USER:$USER ~/ws/src
@@ -34,7 +34,7 @@ Navigate to the source directory and clone the required packages.
 Currently there is a branch for using Fast-LIO2 on ROS2 in the original repository: https://github.com/hku-mars/FAST_LIO/tree/ROS2
 ```bash
 cd ~/ws/src
-git clone https://github.com/Livox-SDK/livox_ros_driver2.git
+git clone https://github.com/Livox-SDK/livox_ros_driver2.git # Skip if you did before
 git clone -b ROS2 https://github.com/hku-mars/FAST_LIO.git --recursive
 ```
 

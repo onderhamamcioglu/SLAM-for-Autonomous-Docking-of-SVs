@@ -6,6 +6,10 @@ First, ensure you have the following hardware ready and properly connected:
 
 * **Nvidia Jetson** (Flashed with JetPack, running Ubuntu compatible with ROS2)
 * **Livox Mid-360 LiDAR** (Connected to Jetson via Ethernet port and powered)
+* **ROS 2** (Desktop-Full installation is needed):
+    - Ubuntu 20.04 for [ROS2 Foxy](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html)
+    - Ubuntu 22.04 for [ROS2 Humble](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html) - _Followed in this guide_
+    - Ubuntu 24.04 for [ROS2 Jazzy](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html)
 
 ## 2. Network Configuration
 The Livox Mid-360 communicates via Ethernet. Both the host (Jetson) and the LiDAR must be on the same subnet (`192.168.1.X`).
@@ -31,7 +35,7 @@ Ensure ROS2 Desktop is installed (required for `rviz2`). Install the necessary b
 
 ```bash
 sudo apt update
-sudo apt install python3-colcon-common-extensions cmake
+sudo apt install python3-colcon-common-extensions cmake -y
 ```
 
 ### 3.2. Install Livox-SDK2
@@ -46,13 +50,12 @@ cmake .. && make -j
 sudo make install
 ```
 
-### 3.3 Install and Configure the ROS2 Driver (livox_ros_driver2)
-
+### 3.3 Install and Configure the Livox ROS2 Driver
 Create your ROS2 workspace and clone the official driver:
 
 ```bash
-mkdir ~/workspace/src
-cd ~/workspace/src
+mkdir ~/ws/src
+cd ~/ws/src
 git clone [https://github.com/Livox-SDK/livox_ros_driver2.git](https://github.com/Livox-SDK/livox_ros_driver2.git)
 ```
 
@@ -81,7 +84,6 @@ ros2 launch livox_ros_driver2 rviz_MID360_launch.py
 ```
 
 ## 5. Recording Data
-
 SLAM algorithms usually require both Point Cloud and IMU data. To record this data into a ROS2 bag file keep the driver running in the first terminal and open a new terminal and create a directory for your records:
 
 ```bash
