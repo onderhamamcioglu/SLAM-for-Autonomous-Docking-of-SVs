@@ -16,8 +16,8 @@ This repository documents process of implementing SLAM for Autonomous Docking of
 - [x] Finalize the 3D CAD design
 - [x] Print the finalized 3D CAD design
 - [x] Conduct physical test fitting and subassembly
-- [ ] Perform water ingress and leakage testing
-- [ ] Complete final prototype assembly  
+- [x] Perform water ingress and leakage testing
+- [x] Complete final prototype assembly  
 
 ### SLAM Implementation
 - [x] Define use cases and system constraints
@@ -25,9 +25,9 @@ This repository documents process of implementing SLAM for Autonomous Docking of
 - [x] Review 3D LiDAR SLAM methodologies
 - [x] Analyze 3D LiDAR SLAM algorithms suitable for ASVs
 - [x] Compile a list of candidate algorithms
-- [x] Select the initial algorithm for implementation
+- [x] Select algorithm(s) for initial trial
 - [x] Identify maritime datasets for testing and validation
-- [x] Test and evaluate the selected algorithm
+- [x] Test and evaluate the selected algorithm(s)
 - [ ] Test the algorithm using data collected by the prototype vessel
 - [ ] Implement algorithm refinements and optimizations (if necessary)
 - [ ] Conduct initial real-world field testing of the algorithm
@@ -36,8 +36,8 @@ This repository documents process of implementing SLAM for Autonomous Docking of
 ## Documentation
 The `doc/` directory contains step-by-step guides for setting up the hardware and software stack used in this project:
 
-* [`LivoxMid360-ROS2.md`](doc/LivoxMid360-ROS2.md): Instructions for setting up, configuring, and interfacing the Livox MID-360 LiDAR sensor within ROS 2 environment.
+* [`LivoxMid360.md`](doc/LivoxMid360.md): Instructions for setting up, configuring, and interfacing the Livox MID-360 LiDAR sensor within ROS 2 environment (Livox-SDK2, `livox_ros_driver2`, network configuration). Prerequisite for the other guides.
 
-* [`FastLIO2-ROS2.md`](doc/FastLIO2-ROS2.md): Guide for installing and configuring the Fast-LIO2 mapping algorithm with ROS 2 Humble on Ubuntu 22.04 (for both PC and Jetson).
+* [`FastLIO2.md`](doc/FastLIO2.md): Complete Fast-LIO2 guide — installing and building it with ROS 2 Humble on Ubuntu 22.04 (for both PC and Jetson), running it in real time with the Livox Mid-360 LiDAR or on recorded bag files, live mapping, saving the generated map, and troubleshooting.
 
-* [`Testing-FastLIO2.md`](doc/Testing-FastLIO2.md): Documentation on testing Fast-LIO2 for maritime SLAM using the MIT Sea Grant Marine Perception Dataset, including steps for dataset conversion (ROS 1 to ROS 2) and mapping configuration. 
+* [`SeaGrant.md`](doc/SeaGrant.md): Documentation on testing Fast-LIO2 for maritime SLAM using the MIT Sea Grant Marine Perception Dataset, including steps for dataset conversion (ROS 1 to ROS 2), mapping configuration, and playback.

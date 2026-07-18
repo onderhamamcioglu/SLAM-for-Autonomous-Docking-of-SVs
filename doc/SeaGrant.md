@@ -1,5 +1,5 @@
-# Testing Fast-LIO2 for Maritime SLAM
-This part documents how to test Fast-LIO2 for SLAM in maritime environment using [MIT Sea Grant Marine Perception Dataset](https://seagrant.mit.edu/auvlab-datasets-marine-perception-1/).
+# Testing Fast-LIO2 with the MIT Sea Grant Dataset
+This document explains what should be done to use the [MIT Sea Grant Marine Perception Dataset](https://seagrant.mit.edu/auvlab-datasets-marine-perception-1/) for testing Fast-LIO2 for SLAM in a maritime environment: downloading the recordings, converting them from ROS 1 to ROS 2 format, configuring Fast-LIO2 for the dataset's Velodyne LiDAR, and playing them back.
 
 Some useful scenarios are:
 
@@ -8,7 +8,8 @@ Some useful scenarios are:
 
 ## 1. Prerequisites
 * **ROS2** (e.g., Humble)
-* **Fast-LIO2** (compiled in your ROS 2 workspace, e.g., `~/ws`)
+* **Livox-SDK2 & `livox_ros_driver2`** (required to build Fast-LIO2 even when using Velodyne data, see [`LivoxMid360.md`](LivoxMid360.md))
+* **Fast-LIO2** (compiled in your ROS 2 workspace, e.g., `~/ws`, see [`FastLIO2.md`](FastLIO2.md))
 
 ## 2. Installing Dependencies
 ```bash

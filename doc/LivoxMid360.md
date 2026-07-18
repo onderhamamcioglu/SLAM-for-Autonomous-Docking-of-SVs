@@ -5,6 +5,7 @@ This part documents the setup process for using Livox Mid-360 LiDAR with ROS2 on
 First, ensure you have the following hardware ready and properly connected:
 
 * **Nvidia Jetson** (Flashed with JetPack, running Ubuntu compatible with ROS2)
+    - If you are doing local tests instead, any Ubuntu installation running a version compatible with your ROS 2 version (22.04 followed in this guide) works as well — natively, via WSL (`wsl --install -d Ubuntu-22.04`), on a server, or on any VM.
 * **Livox Mid-360 LiDAR** (Connected to Jetson via Ethernet port and powered)
 * **ROS 2** (Desktop-Full installation is needed):
     - Ubuntu 20.04 for [ROS2 Foxy](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html)
@@ -94,5 +95,5 @@ cd ~/bag_files
 Start recording both the LiDAR and IMU topics:
 
 ```bash
-ros2 bag record /livox/lidar /livox/imu -o livox_test_record
+ros2 bag record /livox/lidar /livox/imu -o ~/recordings/test
 ```
