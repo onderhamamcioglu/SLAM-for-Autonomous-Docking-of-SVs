@@ -28,8 +28,8 @@ This repository documents process of implementing SLAM for Autonomous Docking of
 - [x] Select algorithm(s) for initial trial
 - [x] Identify maritime datasets for testing and validation
 - [x] Test and evaluate the selected algorithm(s)
-- [ ] Test the algorithm using data collected by the prototype vessel
-- [ ] Implement algorithm refinements and optimizations (if necessary)
+- [x] Test the algorithm using data collected by the prototype vessel
+- [x] Implement algorithm refinements and optimizations (if necessary)
 - [ ] Conduct initial real-world field testing of the algorithm
 - [ ] Implement final algorithm refinements and optimizations (if necessary)
 
