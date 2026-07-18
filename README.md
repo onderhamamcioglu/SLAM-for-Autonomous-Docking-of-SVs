@@ -41,3 +41,5 @@ The `doc/` directory contains step-by-step guides for setting up the hardware an
 * [`FastLIO2.md`](doc/FastLIO2.md): Complete Fast-LIO2 guide — installing and building it with ROS 2 Humble on Ubuntu 22.04 (for both PC and Jetson), running it in real time with the Livox Mid-360 LiDAR or on recorded bag files, live mapping, saving the generated map, and troubleshooting.
 
 * [`SeaGrant.md`](doc/SeaGrant.md): Documentation on testing Fast-LIO2 for maritime SLAM using the MIT Sea Grant Marine Perception Dataset, including steps for dataset conversion (ROS 1 to ROS 2), mapping configuration, and playback.
+
+* [`CostMap.md`](doc/CostMap.md): Guide for generating a live 2D costmap from Fast-LIO2 output using Nav2's `nav2_costmap_2d` and the Spatio-Temporal Voxel Layer — installation, configuration, running the full pipeline on recorded data, and troubleshooting.

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" viewBox="0 0 680 600" role="img">
+  <title>FAST-LIO to STVL data flow</title>
+  <desc>Lidar, IMU and clock from a bag or the Mid360 driver feed FAST-LIO; FAST-LIO publishes a body-frame point cloud and TF that feed the STVL costmap; the costmap publishes an OccupancyGrid to the path planner. RViz shows the registered cloud to the operator and sends the clicked goal pose to the planner.</desc>
+  <style>
+    text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .h { font-size: 14px; font-weight: 600; }
+    .s { font-size: 12px; }
+    .lbl { font-size: 12px; fill: #5F5E5A; }
+    .edge { stroke: #5F5E5A; stroke-width: 1.5; fill: none; }
+    @media (prefers-color-scheme: dark) {
+      .lbl { fill: #B4B2A9; }
+      .edge { stroke: #B4B2A9; }
+    }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path class="edge" d="M2 1L8 5L2 9" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect x="90" y="40" width="250" height="52" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text class="h" x="215" y="60" text-anchor="middle" dominant-baseline="central" fill="#2C2C2A">Data source</text>
+  <text class="s" x="215" y="78" text-anchor="middle" dominant-baseline="central" fill="#5F5E5A">rosbag2 --clock / Mid360 driver</text>
+
+  <line class="edge" x1="215" y1="92" x2="215" y2="184" marker-end="url(#arrow)"/>
+  <text class="lbl" x="228" y="112">/livox/lidar &#183; CustomMsg</text>
+  <text class="lbl" x="228" y="128">/livox/imu &#183; sensor_msgs/Imu</text>
+  <text class="lbl" x="228" y="144">/clock &#183; rosgraph_msgs/Clock</text>
+
+  <rect x="90" y="188" width="250" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text class="h" x="215" y="206" text-anchor="middle" dominant-baseline="central" fill="#04342C">FAST-LIO</text>
+  <text class="s" x="215" y="226" text-anchor="middle" dominant-baseline="central" fill="#085041">/laser_mapping</text>
+
+  <path class="edge" d="M340 214 L555 214 L555 276" marker-end="url(#arrow)"/>
+  <text class="lbl" x="350" y="203">/cloud_registered &#183; PointCloud2</text>
+
+  <rect x="470" y="280" width="170" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text class="h" x="555" y="298" text-anchor="middle" dominant-baseline="central" fill="#2C2C2A">RViz</text>
+  <text class="s" x="555" y="318" text-anchor="middle" dominant-baseline="central" fill="#5F5E5A">view map </text>
+
+  <line class="edge" x1="200" y1="244" x2="200" y2="356" marker-end="url(#arrow)"/>
+  <line class="edge" x1="240" y1="244" x2="240" y2="356" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text class="lbl" x="258" y="266">/cloud_registered_body</text>
+  <text class="lbl" x="258" y="282">PointCloud2 &#183; body frame</text>
+  <text class="lbl" x="258" y="300">mark + clear: 2 subscriptions</text>
+  <text class="lbl" x="258" y="322">TF: camera_init &#8594; body</text>
+
+  <rect x="90" y="360" width="250" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text class="h" x="215" y="378" text-anchor="middle" dominant-baseline="central" fill="#04342C">STVL costmap</text>
+  <text class="s" x="215" y="398" text-anchor="middle" dominant-baseline="central" fill="#085041">/costmap/costmap &#183; nav2</text>
+
+  <line class="edge" x1="215" y1="416" x2="215" y2="500" marker-end="url(#arrow)"/>
+  <text class="lbl" x="228" y="440">/costmap/costmap</text>
+  <text class="lbl" x="228" y="456">nav_msgs/OccupancyGrid</text>
+
+  <!-- Yeni Eklenen Ok ve Etiket -->
+  <path class="edge" d="M340 388 L555 388 L555 340" marker-end="url(#arrow)"/>
+  <text class="lbl" x="350" y="378">/costmap/costmap &#183; OccupancyGrid</text>
+
+  <rect x="90" y="504" width="250" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+  <text class="h" x="215" y="532" text-anchor="middle" dominant-baseline="central" fill="#4A1B0C">Path planner</text>
+
+  <path class="edge" d="M90 216 L48 216 L48 534 L86 534" marker-end="url(#arrow)"/>
+  <text class="lbl" x="56" y="482">nav_msgs/Odometry</text>
+  <text class="lbl" x="56" y="498">/Odometry</text>
+</svg>
