@@ -42,4 +42,4 @@ The `doc/` directory contains step-by-step guides for setting up the hardware an
 
 * [`SeaGrant.md`](doc/SeaGrant.md): Documentation on testing Fast-LIO2 for maritime SLAM using the MIT Sea Grant Marine Perception Dataset, including steps for dataset conversion (ROS 1 to ROS 2), mapping configuration, and playback.
 
-* [`CostMap.md`](doc/CostMap.md): Guide for generating a live 2D costmap from Fast-LIO2 output using Nav2's `nav2_costmap_2d` and the Spatio-Temporal Voxel Layer — installation, configuration, running the full pipeline on recorded data, and troubleshooting.
+* [`CloudWindow.md`](doc/CloudWindow.md): Guide for republishing the last N seconds of Fast-LIO2's registered point cloud as a single rolling-window cloud (`/cloud_window`) with the included [`cloud_window.py`](cloud_window.py) node — a lightweight, RViz *Decay Time*-style local map for docking. Covers the script, its parameters, running the full pipeline on recorded data, and troubleshooting.
