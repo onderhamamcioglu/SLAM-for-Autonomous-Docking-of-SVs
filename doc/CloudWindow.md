@@ -65,7 +65,7 @@ The node starts and waits for data.
 
 ### 5.2 Launch the Cloud Window Node (Terminal 2)
 ```bash
-python3 ~/ws/cloud_window.py --window 10 --min-z -1.0  --ros-args -p use_sim_time:=true
+python3 ~/ws/cloud_window.py --window 10 --rate 10 --min-z -1.0  --ros-args -p use_sim_time:=true
 ```
 On startup it logs the active settings (`window=10.0s rate=2.0Hz z=[-1.0, 1000.0]`) and then stays quiet until scans arrive on `/cloud_registered`.
 
