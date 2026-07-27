@@ -59,7 +59,7 @@ Four terminals are used: Fast-LIO2, the cloud window node, RViz, and bag playbac
 ### 5.1 Launch Fast-LIO2 (Terminal 1)
 Launch Fast-LIO2 without its own RViz — a dedicated RViz is started in [section 5.3](#53-launch-rviz-terminal-3) so it can be configured for `/cloud_window`:
 ```bash
-ros2 launch fast_lio mapping.launch.py config_file:=mid360.yaml use_sim_time:=true rviz:=false
+ros2 launch fast_lio mapping.launch.py config_file:=config.yaml use_sim_time:=true rviz:=false
 ```
 The node starts and waits for data.
 
