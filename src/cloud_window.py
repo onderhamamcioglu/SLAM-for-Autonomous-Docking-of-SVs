@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
-"""Sliding-window accumulator for FAST-LIO's /cloud_registered.
 
-Republishes the last N seconds of registered scans as a single
-PointCloud2 on /cloud_window.
-
+"""
 Usage:
     python3 cloud_window.py --window 10 --rate 2 --min-z -1.0
-    # ROS-style parameters still work and take precedence:
+    or:
     python3 cloud_window.py --ros-args -p window_sec:=10.0
 """
+
 import argparse
 from collections import deque
 
@@ -18,16 +16,9 @@ from rclpy.node import Node
 from rclpy.time import Time
 from sensor_msgs.msg import PointCloud2, PointField
 
-OUT_STEP = 16  # x, y, z, intensity as float32
-
+OUT_STEP = 16
 
 def repack_xyzi(data, point_step, xoff, ioff, min_z, max_z):
-    """One scan: PointXYZINormal bytes -> z-cropped XYZI bytes.
-
-    Reads x,y,z (contiguous float32 at xoff) and intensity (at ioff, -1 if
-    the field is absent), applies the z band, returns 16 B/point bytes.
-    Pure function so it can be tested and benchmarked without ROS.
-    """
     arr = np.frombuffer(data, dtype=np.uint8).reshape(-1, point_step)
     n = arr.shape[0]
     if n == 0:
@@ -48,7 +39,6 @@ def repack_xyzi(data, point_step, xoff, ioff, min_z, max_z):
 class CloudWindow(Node):
     def __init__(self, cli):
         super().__init__('cloud_window')
-        # CLI flags provide the defaults; --ros-args -p overrides them
         self.declare_parameter('window_sec', cli.window)
         self.declare_parameter('publish_rate', cli.rate)
         self.declare_parameter('min_z', cli.min_z)
@@ -58,7 +48,7 @@ class CloudWindow(Node):
         self.max_z = self.get_parameter('max_z').value
         rate = self.get_parameter('publish_rate').value
 
-        self.buf = deque()   # (stamp_ns, stamp_msg, xyzi_bytes)
+        self.buf = deque()
         self.frame = 'camera_init'
         self.fields = [
             PointField(name=n, offset=o, datatype=PointField.FLOAT32,
@@ -74,16 +64,14 @@ class CloudWindow(Node):
 
     def cb(self, msg):
         t = Time.from_msg(msg.header.stamp).nanoseconds
-        # Bag restart / clock jump backwards -> stale buffer, drop it
         if self.buf and t < self.buf[-1][0] - int(1e9):
             self.buf.clear()
             self.get_logger().warn('Time jump detected, buffer cleared')
 
-        # The only per-point work in the whole node: repack + crop, once.
         xoff = next(f.offset for f in msg.fields if f.name == 'x')
         ioff = next((f.offset for f in msg.fields
                      if f.name == 'intensity'), -1)
-        self.frame = msg.header.frame_id  # camera_init
+        self.frame = msg.header.frame_id
         self.buf.append((t, msg.header.stamp,
                          repack_xyzi(msg.data, msg.point_step, xoff, ioff,
                                      self.min_z, self.max_z)))
@@ -91,11 +79,10 @@ class CloudWindow(Node):
     def publish_window(self):
         if not self.buf:
             return
-        newest = self.buf[-1][0]  # anchored to data time -> sim time safe
+        newest = self.buf[-1][0]
         while self.buf and self.buf[0][0] < newest - self.win_ns:
             self.buf.popleft()
 
-        # Scans are already cropped and repacked -> one join, nothing else.
         data = b''.join(b for _, _, b in self.buf)
 
         out = PointCloud2()
@@ -122,10 +109,18 @@ def main():
                      help='drop points below this z (world frame, m)')
     cli.add_argument('--max-z', dest='max_z', type=float, default=1000.0,
                      help='drop points above this z (world frame, m)')
-    known, _ = cli.parse_known_args()  # --ros-args etc. pass through
+    known, _ = cli.parse_known_args()
 
     rclpy.init()
     try:
+        rclpy.spin(CloudWindow(known))
+    except KeyboardInterrupt:
+        pass
+
+
+if __name__ == '__main__':
+    main()
+:
         rclpy.spin(CloudWindow(known))
     except KeyboardInterrupt:
         pass
