@@ -120,11 +120,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-:
-        rclpy.spin(CloudWindow(known))
-    except KeyboardInterrupt:
-        pass
-
-
-if __name__ == '__main__':
-    main()
