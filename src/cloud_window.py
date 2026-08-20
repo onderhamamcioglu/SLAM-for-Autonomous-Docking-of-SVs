@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
-
 """
+Parameters:
+    --window / window_sec  : sliding buffer length in seconds(default 5.0)
+    --rate   / publish_rate: rate of republishing, in Hz (default 2.0)
+    --min-z  / min_z       : discard points below this height in the world frame, in metres
+    --max-z  / max_z       : discard points above this height in the world frame, in metres
 Usage:
     python3 cloud_window.py --window 10 --rate 2 --min-z -1.0
     or:
     python3 cloud_window.py --ros-args -p window_sec:=10.0
 """
-
 import argparse
 from collections import deque
-
 import numpy as np
 import rclpy
 from rclpy.node import Node
@@ -34,7 +36,6 @@ def repack_xyzi(data, point_step, xoff, ioff, min_z, max_z):
         keep = (out[:, 2] > min_z) & (out[:, 2] < max_z)
         out = out[keep]
     return out.tobytes()
-
 
 class CloudWindow(Node):
     def __init__(self, cli):
@@ -98,7 +99,6 @@ class CloudWindow(Node):
         out.data = data
         self.pub.publish(out)
 
-
 def main():
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument('--window', type=float, default=5.0,
@@ -116,7 +116,6 @@ def main():
         rclpy.spin(CloudWindow(known))
     except KeyboardInterrupt:
         pass
-
 
 if __name__ == '__main__':
     main()
